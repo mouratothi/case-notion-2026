@@ -1,20 +1,20 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
 
-# Run and deploy your AI Studio app
+# Notion Growth Case Presentation
 
-This contains everything you need to run your app locally.
+Apresentação interativa sobre a estratégia de crescimento do Notion.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1XRjzATlmvFOb9c3mEmy-RpArJR6rqJna
+## Como publicar no GitHub Pages
 
-## Run Locally
+1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado.
+2. No terminal, na raiz do projeto, rode:
+   ```bash
+   npm install
+   ```
+3. Para gerar a versão final, rode:
+   ```bash
+   npm run build
+   ```
+4. O conteúdo da pasta `dist` que será gerada é o que deve ser enviado para o GitHub Pages.
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Dica para o GitHub Pages:
+Nas configurações do seu repositório no GitHub, vá em **Settings > Pages** e mude a fonte para "GitHub Actions". O GitHub consegue automatizar esse processo se você criar um workflow simples de build.

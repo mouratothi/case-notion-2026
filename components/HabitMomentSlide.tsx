@@ -42,7 +42,8 @@ const HabitMomentSlide: React.FC<SlideProps> = () => {
                   key={i}
                   initial={{ rotate: 0 }}
                   animate={{ rotate: 75 }}
-                  transition={{ delay: i * 0.15, duration: 0.5, ease: "bounceOut" }}
+                  // Changed invalid 'bounceOut' to 'easeOut' to fix the Easing type error
+                  transition={{ delay: i * 0.15, duration: 0.5, ease: "easeOut" }}
                   className="w-12 bg-black text-white p-2 rounded flex items-center justify-center origin-bottom-right"
                   style={{ height: `${60 + i * 20}px` }}
                 >

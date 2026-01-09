@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Flag, Trophy } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 import { SlideProps } from '../types';
 
-const PrinciplesSlide: React.FC<SlideProps> = ({ isLast }) => {
+const PrinciplesSlide: React.FC<SlideProps> = () => {
   return (
     <div className="flex flex-col items-center justify-center h-full px-8 md:px-32 max-w-7xl mx-auto">
       <motion.div 
@@ -28,33 +28,17 @@ const PrinciplesSlide: React.FC<SlideProps> = ({ isLast }) => {
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ delay: i * 0.2 }}
-             className="flex gap-6"
+             className="flex gap-6 items-start"
            >
-              <span className="text-4xl font-black text-gray-100">{p.num}</span>
+              {/* Números com mais contraste (gray-200 em vez de gray-100) */}
+              <span className="text-4xl md:text-5xl font-black text-gray-200 leading-none">{p.num}</span>
               <div>
-                 <h4 className="text-xl font-bold mb-2">{p.title}</h4>
-                 <p className="text-gray-500 leading-relaxed">{p.desc}</p>
+                 <h4 className="text-xl md:text-2xl font-black mb-2 tracking-tight">{p.title}</h4>
+                 <p className="text-gray-500 leading-relaxed text-sm md:text-base">{p.desc}</p>
               </div>
            </motion.div>
          ))}
       </div>
-
-      <motion.div 
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        transition={{ delay: 1.5 }}
-        className="mt-24 flex flex-col items-center"
-      >
-        <p className="text-xs font-black tracking-widest text-gray-300 mb-8 uppercase">Apresentação Finalizada</p>
-        <div className="flex items-center gap-3">
-           <img 
-             src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" 
-             alt="Notion" 
-             className="w-6 h-6"
-           />
-           <span className="font-bold">Notion x Growth Strategy 2024</span>
-        </div>
-      </motion.div>
     </div>
   );
 };

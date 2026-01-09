@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion, useSpring, useTransform, animate } from 'framer-motion';
-import { TrendingUp, Users, ArrowUpRight } from 'lucide-react';
+import { motion, animate } from 'framer-motion';
+import { TrendingUp, Users, ArrowRight } from 'lucide-react';
 import { SlideProps } from '../types';
 
 const Counter = ({ value, duration = 2 }: { value: number, duration?: number }) => {
@@ -47,18 +47,18 @@ const GrowthStatsSlide: React.FC<SlideProps> = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="flex flex-col items-center group"
+          className="flex flex-col items-center group relative"
         >
           <div className="relative mb-6">
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white border border-gray-200 px-3 py-1 rounded-md shadow-sm z-10 whitespace-nowrap">
+               <span className="text-[10px] font-black uppercase tracking-widest text-black">Start</span>
+            </div>
             <motion.div 
               className="w-24 h-24 bg-gray-100 border-2 border-dashed border-gray-300 rounded-2xl flex items-center justify-center group-hover:border-black transition-colors"
               whileHover={{ scale: 1.05 }}
             >
               <Users className="w-8 h-8 text-gray-400 group-hover:text-black transition-colors" />
             </motion.div>
-            <div className="absolute -top-3 -right-3 bg-white border border-gray-200 px-2 py-1 rounded-md shadow-sm">
-               <span className="text-[10px] font-black uppercase tracking-tighter">Start</span>
-            </div>
           </div>
           
           <div className="text-center">
@@ -72,22 +72,32 @@ const GrowthStatsSlide: React.FC<SlideProps> = () => {
 
         {/* O Multiplicador (Caminho) */}
         <div className="hidden md:flex flex-col items-center justify-center flex-1 pb-16 px-4">
-           <motion.div 
-             initial={{ scaleX: 0 }}
-             animate={{ scaleX: 1 }}
-             transition={{ duration: 1, delay: 0.5 }}
-             className="w-full h-[2px] bg-gradient-to-r from-gray-200 via-black to-black relative"
-           >
+           <div className="w-full relative flex items-center">
               <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: -40 }}
-                transition={{ delay: 1.2 }}
-                className="absolute left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 rounded-xl text-2xl font-black shadow-xl"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="flex-1 h-[2px] bg-gradient-to-r from-gray-200 via-black to-black origin-left"
+              />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.4 }}
+                className="flex-shrink-0 -ml-1"
+              >
+                <ArrowRight className="w-6 h-6 text-black" />
+              </motion.div>
+
+              {/* Badge 100x Centralizado na linha */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
+                className="absolute left-1/2 -translate-x-1/2 top-[-24px] bg-black text-white px-4 py-2 rounded-xl text-2xl font-black shadow-xl z-20"
               >
                 100x
               </motion.div>
-              <ArrowUpRight className="absolute right-0 -top-2 w-6 h-6 text-black" />
-           </motion.div>
+           </div>
         </div>
 
         {/* 2024 - A Explosão */}
@@ -95,11 +105,14 @@ const GrowthStatsSlide: React.FC<SlideProps> = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center group relative"
         >
           <div className="relative mb-6">
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse z-10 whitespace-nowrap">
+               Presente
+            </div>
             <motion.div 
-              className="w-48 h-64 bg-black rounded-3xl flex items-end p-6 overflow-hidden shadow-2xl"
+              className="w-48 h-64 bg-black rounded-3xl flex items-end p-6 overflow-hidden shadow-2xl group-hover:scale-[1.02] transition-transform"
               initial={{ height: 0 }}
               animate={{ height: 256 }}
               transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
@@ -110,9 +123,6 @@ const GrowthStatsSlide: React.FC<SlideProps> = () => {
                  ))}
               </div>
             </motion.div>
-            <div className="absolute -top-4 -right-4 bg-black text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse">
-               Presente
-            </div>
           </div>
           
           <div className="text-center">

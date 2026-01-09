@@ -13,38 +13,53 @@ const CLGIntroSlide: React.FC<SlideProps> = () => {
       </div>
 
       <div className="flex flex-col md:flex-row items-center gap-16 w-full max-w-6xl">
-        <div className="flex-1 relative">
+        <div className="flex-1 relative flex justify-center">
            {/* SVG Iceberg Drawing */}
            <motion.svg 
              viewBox="0 0 200 200" 
-             className="w-full h-auto drop-shadow-xl"
+             className="w-full max-w-[350px] h-auto drop-shadow-2xl"
              initial={{ opacity: 0, y: 50 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 1 }}
            >
-              {/* Sea Line */}
-              <line x1="10" y1="80" x2="190" y2="80" stroke="black" strokeWidth="2" strokeDasharray="4 4" />
+              {/* Sea Line - Agora mais visível e elegante */}
+              <line x1="10" y1="85" x2="190" y2="85" stroke="#e5e7eb" strokeWidth="2" strokeDasharray="6 4" />
               
-              {/* Top part (Proprietary) */}
+              {/* Top part (Proprietary/Official MKT) - Cor alterada para cinza claro visível */}
               <motion.path 
-                d="M100 20 L130 80 L70 80 Z" 
-                fill="#f3f4f6" 
+                d="M100 25 L135 85 L65 85 Z" 
+                fill="#F3F4F6" 
                 stroke="black" 
                 strokeWidth="2" 
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }} 
+                transition={{ delay: 1 }}
               />
               
-              {/* Bottom part (Community) */}
+              {/* Bottom part (Community) - Polígono maior para acomodar o texto */}
               <motion.path 
-                d="M70 80 L130 80 L140 140 L110 170 L70 160 L50 120 Z" 
+                d="M65 85 L135 85 L155 145 L110 185 L55 175 L35 130 Z" 
                 fill="black" 
                 stroke="black" 
                 strokeWidth="2" 
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }} 
+                transition={{ delay: 1.5 }}
               />
               
-              <text x="140" y="60" className="text-[8px] font-bold" fill="black">MKT Oficial</text>
-              <text x="135" y="130" className="text-[12px] font-black" fill="white">COMUNIDADE</text>
+              {/* Labels - Posicionamento corrigido e centralizado */}
+              <text x="142" y="65" className="text-[10px] font-black uppercase tracking-tighter" fill="black">MKT Oficial</text>
+              
+              {/* Texto Comunidade centralizado usando text-anchor */}
+              <text 
+                x="95" 
+                y="140" 
+                textAnchor="middle" 
+                className="text-[14px] font-black tracking-[0.1em]" 
+                fill="white"
+              >
+                COMUNIDADE
+              </text>
            </motion.svg>
         </div>
 
@@ -56,12 +71,12 @@ const CLGIntroSlide: React.FC<SlideProps> = () => {
               </p>
            </div>
            
-           <div className="p-8 border-l-4 border-black bg-gray-50 italic relative">
+           <div className="p-8 border-l-4 border-black bg-gray-50 italic relative rounded-r-2xl">
               <Quote className="absolute top-4 left-4 w-8 h-8 opacity-5" />
-              <p className="text-lg text-gray-600 mb-4">
+              <p className="text-lg text-gray-600 mb-4 leading-relaxed">
                 "Community is a force that should power every stage of the funnel."
               </p>
-              <footer className="text-sm font-bold">— Olivia Nottebohm, CRO do Notion</footer>
+              <footer className="text-sm font-bold text-black">— Olivia Nottebohm, CRO do Notion</footer>
            </div>
         </div>
       </div>

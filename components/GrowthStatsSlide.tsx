@@ -1,64 +1,137 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import React, { useState, useEffect } from 'react';
+import { motion, useSpring, useTransform, animate } from 'framer-motion';
+import { TrendingUp, Users, ArrowUpRight } from 'lucide-react';
 import { SlideProps } from '../types';
 
-const data = [
-  { year: '2020', users: 1000000, label: '1 Milhão' },
-  { year: '2024', users: 100000000, label: '100 Milhões' },
-];
+const Counter = ({ value, duration = 2 }: { value: number, duration?: number }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const controls = animate(0, value, {
+      duration: duration,
+      onUpdate: (latest) => setCount(Math.floor(latest)),
+    });
+    return () => controls.stop();
+  }, [value, duration]);
+
+  return <span>{count.toLocaleString()}</span>;
+};
 
 const GrowthStatsSlide: React.FC<SlideProps> = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-full px-8 md:px-24">
-      <motion.h2 
-        className="text-4xl md:text-6xl font-bold mb-12 text-center tracking-tight"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        Um crescimento de <span className="bg-black text-white px-2">100x</span> em 4 anos.
-      </motion.h2>
-
-      <div className="w-full h-[400px] mb-12">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
-            <XAxis dataKey="year" axisLine={false} tickLine={false} />
-            <Tooltip 
-              cursor={{fill: '#f5f5f5'}}
-              contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }}
-              formatter={(value: number) => value.toLocaleString()}
-            />
-            <Bar dataKey="users" radius={[8, 8, 0, 0]} barSize={80}>
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={index === 0 ? "#e5e7eb" : "#000000"} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+    <div className="flex flex-col items-center justify-center h-full px-8 md:px-24 bg-white">
+      <div className="text-center max-w-4xl mb-16">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full mb-6"
+        >
+          <TrendingUp className="w-4 h-4 text-black" />
+          <span className="text-xs font-black uppercase tracking-widest">Escala Global</span>
+        </motion.div>
+        
+        <motion.h2 
+          className="text-5xl md:text-7xl font-black mb-4 tracking-tighter leading-none"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          De um nicho para <br/>
+          <span className="text-gray-400">o padrão de mercado.</span>
+        </motion.h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-center w-full max-w-4xl">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-          <p className="text-sm uppercase tracking-widest text-gray-400 font-bold mb-1">2020</p>
-          <p className="text-4xl font-black">1.000.000</p>
-          <p className="text-gray-500">Usuários Ativos</p>
+      <div className="flex flex-col md:flex-row items-end justify-center gap-12 w-full max-w-6xl mb-12">
+        {/* 2020 - O Alicerce */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-col items-center group"
+        >
+          <div className="relative mb-6">
+            <motion.div 
+              className="w-24 h-24 bg-gray-100 border-2 border-dashed border-gray-300 rounded-2xl flex items-center justify-center group-hover:border-black transition-colors"
+              whileHover={{ scale: 1.05 }}
+            >
+              <Users className="w-8 h-8 text-gray-400 group-hover:text-black transition-colors" />
+            </motion.div>
+            <div className="absolute -top-3 -right-3 bg-white border border-gray-200 px-2 py-1 rounded-md shadow-sm">
+               <span className="text-[10px] font-black uppercase tracking-tighter">Start</span>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-sm font-bold text-gray-400 uppercase mb-1">2020</p>
+            <h3 className="text-4xl font-black mb-1 leading-none">
+              <Counter value={1} />M
+            </h3>
+            <p className="text-xs text-gray-500 font-medium">Usuários Ativos</p>
+          </div>
         </motion.div>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
-          <p className="text-sm uppercase tracking-widest text-gray-400 font-bold mb-1">2024</p>
-          <p className="text-4xl font-black">100.000.000</p>
-          <p className="text-gray-500">Usuários Ativos</p>
+
+        {/* O Multiplicador (Caminho) */}
+        <div className="hidden md:flex flex-col items-center justify-center flex-1 pb-16 px-4">
+           <motion.div 
+             initial={{ scaleX: 0 }}
+             animate={{ scaleX: 1 }}
+             transition={{ duration: 1, delay: 0.5 }}
+             className="w-full h-[2px] bg-gradient-to-r from-gray-200 via-black to-black relative"
+           >
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: -40 }}
+                transition={{ delay: 1.2 }}
+                className="absolute left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 rounded-xl text-2xl font-black shadow-xl"
+              >
+                100x
+              </motion.div>
+              <ArrowUpRight className="absolute right-0 -top-2 w-6 h-6 text-black" />
+           </motion.div>
+        </div>
+
+        {/* 2024 - A Explosão */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="flex flex-col items-center"
+        >
+          <div className="relative mb-6">
+            <motion.div 
+              className="w-48 h-64 bg-black rounded-3xl flex items-end p-6 overflow-hidden shadow-2xl"
+              initial={{ height: 0 }}
+              animate={{ height: 256 }}
+              transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+            >
+              <div className="grid grid-cols-4 gap-2 w-full opacity-20">
+                 {[...Array(12)].map((_, i) => (
+                   <div key={i} className="h-8 bg-white rounded-md" />
+                 ))}
+              </div>
+            </motion.div>
+            <div className="absolute -top-4 -right-4 bg-black text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse">
+               Presente
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-sm font-bold text-gray-400 uppercase mb-1">2024</p>
+            <h3 className="text-5xl md:text-6xl font-black mb-1 leading-none">
+              <Counter value={100} duration={3} />M
+            </h3>
+            <p className="text-xs text-gray-500 font-medium">Comunidade Global</p>
+          </div>
         </motion.div>
       </div>
 
       <motion.p 
-        className="mt-16 text-gray-400 text-sm max-w-xl text-center italic"
+        className="text-gray-400 text-sm max-w-xl text-center italic border-t border-gray-100 pt-8 mt-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
+        transition={{ delay: 1.5 }}
       >
-        Hoje, a empresa é avaliada em <b>$10 bilhões</b> e possui mais de 80% de sua base de usuários fora dos EUA.
+        "O Notion não apenas cresceu, ele redefiniu como o mundo organiza a informação."
       </motion.p>
     </div>
   );

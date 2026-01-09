@@ -3,18 +3,13 @@
 
 Apresentação interativa sobre a estratégia de crescimento do Notion.
 
-## Como publicar no GitHub Pages
+## Como publicar no Vercel (Recomendado)
 
-1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado.
-2. No terminal, na raiz do projeto, rode:
-   ```bash
-   npm install
-   ```
-3. Para gerar a versão final, rode:
-   ```bash
-   npm run build
-   ```
-4. O conteúdo da pasta `dist` que será gerada é o que deve ser enviado para o GitHub Pages.
+O Vercel é a forma mais fácil e rápida de colocar esse projeto no ar.
 
-### Dica para o GitHub Pages:
-Nas configurações do seu repositório no GitHub, vá em **Settings > Pages** e mude a fonte para "GitHub Actions". O GitHub consegue automatizar esse processo se você criar um workflow simples de build.
+1. Suba os arquivos para um repositório no GitHub.
+2. Acesse [vercel.com](https://vercel.com) e conecte sua conta do GitHub.
+3. Importe o repositório. O Vercel detectará automaticamente que é um projeto Vite (através do package.json).
+4. Clique em **Deploy**. 
+
+Pronto! Seu site estará online com HTTPS e atualizações automáticas sempre que você alterar o código no GitHub.

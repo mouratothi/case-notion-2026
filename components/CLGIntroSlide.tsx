@@ -1,83 +1,97 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
+import { Quote, ArrowDown } from 'lucide-react';
 import { SlideProps } from '../types';
 
 const CLGIntroSlide: React.FC<SlideProps> = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-full px-8 md:px-24">
-      <div className="text-center max-w-4xl mb-16">
-        <h2 className="text-4xl md:text-5xl font-black mb-6">O segundo motor: Community-Led Growth.</h2>
-        <p className="text-xl text-gray-500">Quando seus usuários mais apaixonados se tornam seu melhor time de marketing.</p>
+    <div className="flex flex-col items-center justify-center h-full px-8 md:px-24 bg-white select-none">
+      {/* Header Minimalista */}
+      <div className="text-center max-w-4xl mb-20">
+        <motion.span 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-xs font-black uppercase tracking-[0.4em] text-gray-400 mb-4 block"
+        >
+          Estratégia de Amplificação
+        </motion.span>
+        <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-[0.9]">
+          Community-Led <br/>
+          <span className="text-gray-300">Growth.</span>
+        </h2>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center gap-16 w-full max-w-6xl">
-        <div className="flex-1 relative flex justify-center">
-           {/* SVG Iceberg Drawing */}
-           <motion.svg 
-             viewBox="0 0 200 200" 
-             className="w-full max-w-[350px] h-auto drop-shadow-2xl"
-             initial={{ opacity: 0, y: 50 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 1 }}
-           >
-              {/* Sea Line - Agora mais visível e elegante */}
-              <line x1="10" y1="85" x2="190" y2="85" stroke="#e5e7eb" strokeWidth="2" strokeDasharray="6 4" />
-              
-              {/* Top part (Proprietary/Official MKT) - Cor alterada para cinza claro visível */}
-              <motion.path 
-                d="M100 25 L135 85 L65 85 Z" 
-                fill="#F3F4F6" 
-                stroke="black" 
-                strokeWidth="2" 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
-                transition={{ delay: 1 }}
-              />
-              
-              {/* Bottom part (Community) - Polígono maior para acomodar o texto */}
-              <motion.path 
-                d="M65 85 L135 85 L155 145 L110 185 L55 175 L35 130 Z" 
-                fill="black" 
-                stroke="black" 
-                strokeWidth="2" 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
+      <div className="flex flex-col lg:flex-row items-stretch gap-12 w-full max-w-7xl h-[450px]">
+        
+        {/* Visual: O Novo Iceberg (Abstrato e Sofisticado) */}
+        <div className="flex-1 relative flex items-center justify-center overflow-hidden rounded-3xl bg-gray-50 border border-gray-100">
+          
+          {/* Linha do Horizonte (Mar) */}
+          <div className="absolute top-[35%] left-0 w-full h-[1px] bg-gray-200 z-10" />
+          
+          <div className="relative w-full h-full flex flex-col items-center">
+            
+            {/* Topo: MKT Oficial (A Ponta) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 z-20 flex flex-col items-center"
+            >
+              <div className="w-16 h-16 bg-white border-2 border-black rounded-lg rotate-45 flex items-center justify-center shadow-xl">
+                <div className="w-8 h-8 bg-black rounded-sm -rotate-45" />
+              </div>
+              <span className="mt-8 text-[10px] font-black uppercase tracking-widest text-black">Mkt Oficial (10%)</span>
+            </motion.div>
+
+            {/* Base: Comunidade (A Massa) */}
+            <motion.div 
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: '65%', opacity: 1 }}
+              transition={{ duration: 1.2, ease: "circOut", delay: 0.2 }}
+              className="absolute bottom-0 w-[85%] bg-black rounded-t-[4rem] flex flex-col items-center justify-start pt-16 px-12 text-center shadow-[0_-20px_50px_rgba(0,0,0,0.1)]"
+            >
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.15 }}
                 transition={{ delay: 1.5 }}
-              />
-              
-              {/* Labels - Posicionamento corrigido e centralizado */}
-              <text x="142" y="65" className="text-[10px] font-black uppercase tracking-tighter" fill="black">MKT Oficial</text>
-              
-              {/* Texto Comunidade centralizado usando text-anchor */}
-              <text 
-                x="95" 
-                y="140" 
-                textAnchor="middle" 
-                className="text-[14px] font-black tracking-[0.1em]" 
-                fill="white"
+                className="absolute top-8"
               >
+                <ArrowDown className="w-12 h-12 text-white" />
+              </motion.div>
+              
+              <h3 className="text-white text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-none">
                 COMUNIDADE
-              </text>
-           </motion.svg>
+              </h3>
+              <p className="text-gray-400 text-sm font-medium max-w-xs leading-relaxed">
+                A força invisível que sustenta a marca, cria confiança e escala o produto globalmente sem custo de mídia.
+              </p>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="flex-1 space-y-10">
-           <div>
-              <h4 className="text-xs font-black uppercase text-gray-400 mb-4 tracking-widest">Conceito</h4>
-              <p className="text-xl leading-relaxed text-gray-700">
-                CLG é quando pessoas, dentro e fora das organizações, advogam a favor da empresa e influenciam indiretamente as decisões de compra.
-              </p>
-           </div>
-           
-           <div className="p-8 border-l-4 border-black bg-gray-50 italic relative rounded-r-2xl">
-              <Quote className="absolute top-4 left-4 w-8 h-8 opacity-5" />
-              <p className="text-lg text-gray-600 mb-4 leading-relaxed">
-                "Community is a force that should power every stage of the funnel."
-              </p>
-              <footer className="text-sm font-bold text-black">— Olivia Nottebohm, CRO do Notion</footer>
-           </div>
+        {/* Conteúdo: Conceito e Citação */}
+        <div className="flex-1 flex flex-col justify-between py-4">
+          <div className="space-y-6">
+            <div className="inline-block p-2 bg-black text-white rounded-lg">
+              <Quote className="w-5 h-5" />
+            </div>
+            <p className="text-2xl md:text-3xl font-medium text-gray-800 leading-tight tracking-tight">
+              "CLG é quando o seu melhor time de marketing não está na sua folha de pagamento."
+            </p>
+            <p className="text-lg text-gray-500 leading-relaxed border-l-2 border-gray-100 pl-6">
+              É a transição de um modelo de <b>transação</b> para um modelo de <b>pertencimento</b>. No Notion, os usuários não apenas usam; eles advogam.
+            </p>
+          </div>
+
+          <div className="p-8 bg-gray-50 rounded-2xl border border-gray-100">
+             <p className="text-sm text-gray-400 font-bold uppercase tracking-widest mb-2">Insight Estratégico</p>
+             <p className="text-sm text-gray-600 leading-relaxed italic">
+               O marketing oficial gera <b>atenção</b>. <br/>
+               A comunidade gera <b>autoridade</b>.
+             </p>
+          </div>
         </div>
       </div>
     </div>
